@@ -19,7 +19,7 @@ public class Background {
         if (game.pause) return;
         xx -= 2;
         xy -= 2;
-        if (xy <= -texture.getHeight()) {
+        if (xx <= -texture.getHeight()) {
             xx = xy + texture.getHeight();
         }
         if (xy <= -texture.getHeight()) {

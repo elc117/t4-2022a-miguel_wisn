@@ -12,7 +12,6 @@ public class MainMenuScreen implements Screen {
     private final Start game;
     private OrthographicCamera camera;
     private Texture mageImage;
-    //private SpriteBatch batch;
 
     public MainMenuScreen(Start game) {
         mageImage = new Texture(Gdx.files.internal("mage.jpg"));

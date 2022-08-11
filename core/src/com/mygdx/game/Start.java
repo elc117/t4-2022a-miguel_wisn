@@ -23,7 +23,6 @@ public class Start extends Game {
 
     public void create() {
         batch = new SpriteBatch();
-        //Use LibGDX's default Arial font.
         font = new BitmapFont(
                 Gdx.files.internal("verdana.fnt"),
                 Gdx.files.internal("verdana.png"), false);

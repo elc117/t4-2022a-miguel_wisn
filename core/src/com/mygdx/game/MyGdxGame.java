@@ -36,6 +36,7 @@ public class MyGdxGame implements Screen {
     Texture background;
     Texture textureMage;
     Texture textureMonster;
+    Texture textureSoldier;
     Texture textureMagic;
     Texture texturePause;
     Texture textureGameOver;
@@ -47,6 +48,8 @@ public class MyGdxGame implements Screen {
     Random rand = new Random();
     int monsterCount = 0;
     int monsterMax = 50;
+    int soldierCount = 0;
+    int soldierMax = 50;
     int score;
     boolean pause = false;
     boolean isPlaying = true;
@@ -54,20 +57,12 @@ public class MyGdxGame implements Screen {
 
     public MyGdxGame(final Start game) {
         this.game = game;
-		//set initial state
-		//state = State.RUN;
-
-        // load the images for the droplet and the bucket, 64x64 pixels each
-        //dropImage = new Texture(Gdx.files.internal("droplet.png"));
-        //bucketImage = new Texture(Gdx.files.internal("bucket.png"));
-        //
         w = Gdx.graphics.getWidth();
         h = Gdx.graphics.getHeight();
-
-        //
         background = new Texture("background.jpg");
         textureMage = new Texture("mage.png");
         textureMonster = new Texture("monster.png");
+        textureSoldier = new Texture("soldier.png");
         textureMagic = new Texture("magic.png");
         texturePause = new Texture("paused.png");
         textureGameOver = new Texture("gameover.png");
@@ -89,12 +84,10 @@ public class MyGdxGame implements Screen {
         music = Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
         music.setLooping(true);
         music.play();
-
-        //create the Camera and the SpriteBatch
+        //create the Camera and the SpriteBatch (comentário próprio do código extendend-drop-game, disponibilziado pela professora)
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 600);
         batch = new SpriteBatch();
-
     }
 
     public void execute() {
@@ -128,6 +121,7 @@ public class MyGdxGame implements Screen {
         bg.run();
         for (Actor a : actors) a.run();
         monsters();
+        soldiers();
         clean();
     }
 
@@ -135,25 +129,15 @@ public class MyGdxGame implements Screen {
     @Override
     public void render(float delta) {
         execute();
-		/*if (Gdx.input.isKeyPressed(Input.Keys.P))
-			pause();
-		if (Gdx.input.isKeyPressed(Input.Keys.R))
-			resume();*/
-
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // tell the camera to update its matrices.
+        // tell the camera to update its matrices. (comentário próprio do código extendend-drop-game, disponibilziado pela professora)
         camera.update();
-        // tell the SpriteBatch to render in the
-        // coordinate system specified by the camera.
+        // tell the SpriteBatch to render in then (comentário próprio do código extendend-drop-game, disponibilziado pela professora)
+        // coordinate system specified by the camera. (comentário próprio do código extendend-drop-game, disponibilziado pela professora)
         game.batch.setProjectionMatrix(camera.combined);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		/*batch.draw(bucketImage, bucket.x, bucket.y);
-		for (Rectangle raindrop : raindrops) {
-			batch.draw(dropImage, raindrop.x, raindrop.y);
-		}
-        font.draw(batch, String.valueOf(count_raindrops), 10, 470);*/
         bg.draw(batch);
         for (Actor a : actors) a.draw();
         font.draw(batch, "SCORE: " + score, 1, h);
@@ -167,50 +151,6 @@ public class MyGdxGame implements Screen {
         }
         batch.end();
 
-		/*switch (state) {
-            case RUN:
-            	//check mouse input
-                if (Gdx.input.isTouched()) {
-                    Vector3 touchPos = new Vector3();
-                    touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-                    camera.unproject(touchPos);
-                    bucket.x = touchPos.x - 64 / 2;
-                }
-                //check keyboard input
-                if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-                    bucket.x -= 200 * Gdx.graphics.getDeltaTime();
-                if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-                    bucket.x += 200 * Gdx.graphics.getDeltaTime();
-                //check screen limits
-                if (bucket.x < 0)
-                    bucket.x = 0;
-                if (bucket.x > 800 - 64)
-                    bucket.x = 800 - 64;
-                //check time to create another raindrop
-                if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
-                    spawnRaindrop();
-                //move raindrops created
-                for (Iterator<Rectangle> it = raindrops.iterator(); it.hasNext(); ) {
-                    Rectangle raindrop = it.next();
-                    raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
-                    //check if it is beyond the screen
-                    if (raindrop.y + 64 < 0)
-                        it.remove();
-                    //check collision between bucket and raindrops
-                    if (raindrop.overlaps(bucket)) {
-                        count_raindrops++;
-                        dropSound.play();
-                        it.remove();
-                    }
-                }
-                break;
-            case PAUSE:
-            	batch.begin();
-				font.draw(batch, "PAUSED", 380, 250);
-                batch.end();
-				break;
-        }*/
-
 
     }
     void monsters() {
@@ -222,6 +162,18 @@ public class MyGdxGame implements Screen {
                     textureMonster, this));
             monsterCount = 0;
             monsterMax = 30 + rand.nextInt(50);
+        }
+    }
+
+    void soldiers() {
+        if (pause) return;
+        soldierCount++;
+        if (soldierCount > soldierMax) {
+            actors.add(new Soldier(
+                    rand.nextInt(w - textureSoldier.getWidth()), h + 50,
+                    textureSoldier, this));
+            soldierCount = 0;
+            soldierMax = 30 + rand.nextInt(50);
         }
     }
 
@@ -244,9 +196,7 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void show() {
-        // start the playback of the background music
-        // when the screen is shown
-        //rainMusic.play();
+
     }
 
     @Override
@@ -256,12 +206,12 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void pause() {
-        //this.state = State.PAUSE;
+
     }
 
     @Override
     public void resume() {
-        //this.state = State.RUN;
+
     }
 
     @Override
@@ -271,17 +221,8 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void dispose() {
-        /*dropImage.dispose();
-        bucketImage.dispose();
-        dropSound.dispose();
-        rainMusic.dispose();
-        batch.dispose();*/
         background.dispose();
         batch.dispose();
     }
 
-    /*public enum State {
-        PAUSE,
-        RUN,
-    }*/
 }

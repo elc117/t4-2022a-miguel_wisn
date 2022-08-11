@@ -14,14 +14,14 @@ public class Monster extends Actor {
 
     @Override
     void execute() {
-        sprite.translateY(-5);
+        sprite.translateY(-10);
         if (direction == RIGHT) {
-            sprite.translateX(5);
+            sprite.translateX(10);
             if (sprite.getX() + sprite.getWidth() > game.w) {
                 direction = LEFT;
             }
         } else {
-            sprite.translateX(-5);
+            sprite.translateX(-10);
             if (sprite.getX() < 0) {
                 direction = RIGHT;
             }
