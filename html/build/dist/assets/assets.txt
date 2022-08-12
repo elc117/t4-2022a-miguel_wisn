@@ -5,12 +5,14 @@ i:effect_0.png:effect_0-18dd6c86e49c4bdde348256b2b3e1af9.png:2615:image/png:1
 i:effect_1.png:effect_1-fbc5b0883cf2478cb65e03bd00f7abab.png:4983:image/png:1
 i:effect_2.png:effect_2-072719c1f4a44300e610c3cf0b47dabe.png:8497:image/png:1
 i:gameover.png:gameover-269e9e5dce0017b889e65a7f54765274.png:85138:image/png:1
+i:mage.jpg:mage-3a2b0296a5acb9800e5cfbe852e49d75.jpg:133088:image/jpeg:1
 i:mage.png:mage-d745612684d031b465f7df2face1345f.png:8141:image/png:1
 i:magic.png:magic-d3c61ede506cd06bb134f9d34884729e.png:2297:image/png:1
 a:magic.wav:magic-50ff797803027f1549c943bcce724dc1.wav:32886:audio/x-wav:1
 i:monster.png:monster-3ec6da0569369224565e309218c4b842.png:5430:image/png:1
 a:music.ogg:music-d6491ce60d50d5ac6215490d970e21a1.ogg:964972:audio/ogg:1
 i:paused.png:paused-1a213fbac6b1bc01ff04e6fe9815fda7.png:77679:image/png:1
+i:soldier.png:soldier-9f0fc52cd47505f535c41787875f175a.png:6954:image/png:1
 t:verdana.fnt:verdana-75d7175de34a0e533bd8480cdcbb94a5.fnt:18758:application/unknown:1
 i:verdana.png:verdana-6b65af46f65b3e3056f2353cfc9bb1f1.png:17463:image/png:1
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:particles.fragment-b90524761fdf09b0a836056d590c30b8.glsl:820:application/unknown:1
